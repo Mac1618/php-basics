@@ -189,3 +189,166 @@ $combine_arr = array_combine($keys, $vals);     // note: these two values should
 $nums = [1, 2, 4, 5, 7, 8];
 var_dump(array_map(fn($el) => $el + 1, $nums));        // maps '$nums' and add +1 for each items
 var_dump(array_filter($nums, fn($el) => $el >= 5));       // filter each '$nums' items if greather than or equalts to 5 
+
+
+// CONDITIONAL STATEMENTS
+$age = 61;
+
+// IF ELSE with LOGICAL OPERATOR example
+// using 'and' operator or '&&'
+if (1 == 2 && $age <= 60) {
+  echo 'if with and is true';
+}
+
+// using 'or' operator or '||'
+elseif ($age > 21 || $age < 60) {
+  echo 'else if with or is true';
+}
+
+// not null
+elseif (!$age) {
+  echo 'else if with not null is true';
+}
+
+// default
+else {
+  echo 'else is true';
+}
+
+
+// SWITCH CASE
+switch ($age) {
+  case $age < 11:
+    echo "You're a child";
+    break;    // break the code or don't continue
+
+  case $age >= 12 && $age <= 18:
+    echo "You're a teenager";
+    break;
+
+  case $age >= 19:
+    echo "You're an adult";
+    break;
+
+  default:
+    echo "Unidentified age";
+    break;
+}
+
+
+// TERNARY OPERATOR
+echo $age < 21 ? "You can drink" : "Sorry no drinks for you";
+
+
+// NULL COALESCING OPERATOR
+$val = null;
+echo $val;                           // this will not show anything
+echo $val ?? 'no value or null';     // if null shows 'no value or null'
+
+
+// WHILE LOOP example
+$a = 0;
+while ($a <= 3) {
+  echo "while loop: $a<br>";
+  $a++;
+}
+
+
+// DO WHILE LOOP example
+$b = 1;
+do {
+  echo "do while loop: $b<br>";
+  $b++;
+} while ($b <= 3);
+
+
+// FOR LOOP example
+for ($i = 1; $i <= 3; $i++) {
+  echo "for loop: $i<br>";
+}
+
+
+// FOR EACH LOOP example
+$arrVal = [2, 4, 'six', 'eight'];
+foreach ($arrVal as $element) {
+  echo "for each loop: $element<br>";
+}
+
+// with associate array
+$arrVal2 = ['two', 'four', 6, 8];
+foreach ($arrVal2 as $element => $value) {
+  echo "for each loop2: $element => $value<br>";
+}
+
+
+// BREAK and CONTINUE statement
+for ($i = 0; $i < 5; $i++) {
+
+  // skip this number
+  if ($i === 2) {
+    continue;
+  }
+
+  // break the code if '$i' is equals to 4
+  if ($i === 4) {
+    break;
+  }
+
+  echo "break and continue: $i<br>";
+}
+
+
+
+// FUNCTIONS and SCOPES: Global, Local, Static
+$num = 10;            // Global variable
+
+function greet()
+{
+  $fname = 'Jonny';   // Local varibale
+  echo "Greet function: Hello $fname<br>";
+}
+echo greet();   // calling a function
+
+
+// Static: saves the value of the scope
+function add()
+{
+  static $a = 0;      // Static variable
+  $a++;
+  return "Add function: $a<br>";
+}
+echo add();   // 1: calling a function
+echo add();   // 2: calling a function
+echo add();   // 3: calling a function
+
+
+// FUNCTION with DEFAULT PARAMETERS
+function pets($petName = 'casper') // '$petName' is parameter and 'casper' is default value
+{
+  return "Your pet name is $petName<br>";
+}
+
+echo pets('Siopao');
+echo pets();
+
+
+// For specific amount of parameter
+function addition($x = 0, $y = 0)
+{
+  return $x - $y;
+}
+echo addition(2, 1);
+
+// Function REST Operator || SPREAD Operator 
+// No specific amount of parameter
+function advAddition(...$x) // if you have morethean 1 parameter spread operator should be the last one '($y, ...$x)'
+{
+  // normal function
+  // return array_reduce($x, function ($a, $b) {
+  //   return $a + $b;
+  // });
+
+  // array function
+  return array_reduce($x, fn($a, $b) => $a + $b);
+}
+var_dump(advAddition(2, 424, 65, 34, 5, 234, 46, 235));
